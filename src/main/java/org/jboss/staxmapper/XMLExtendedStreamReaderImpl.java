@@ -48,7 +48,7 @@ final class XMLExtendedStreamReaderImpl implements XMLExtendedStreamReader {
 
     XMLExtendedStreamReaderImpl(final XMLMapperImpl xmlMapper, final XMLStreamReader streamReader) {
         this.xmlMapper = xmlMapper;
-        this.streamReader = streamReader;
+        this.streamReader = new IncludingXMLStreamReader(streamReader);
         fixedStreamReader = new FixedXMLStreamReader(this.streamReader);
         stack.push(new Context());
     }

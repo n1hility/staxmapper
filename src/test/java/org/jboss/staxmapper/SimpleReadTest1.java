@@ -26,6 +26,7 @@ import static javax.xml.stream.XMLStreamConstants.COMMENT;
 import static javax.xml.stream.XMLStreamConstants.END_ELEMENT;
 import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
 
+import java.io.File;
 import java.io.StringReader;
 
 import javax.xml.XMLConstants;
@@ -41,6 +42,7 @@ import javax.xml.stream.XMLStreamReader;
 public final class SimpleReadTest1 implements XMLElementReader<Object> {
 
     public static void main(String[] args) throws XMLStreamException {
+        System.out.println(new File(".").getAbsolutePath());
         final XMLMapper mapper = XMLMapper.Factory.create();
         mapper.registerRootElement(new QName("urn:test:one", "root"), new SimpleReadTest1());
         mapper.parseDocument(Boolean.TRUE, XMLInputFactory.newInstance().createXMLStreamReader(new StringReader(
@@ -48,6 +50,7 @@ public final class SimpleReadTest1 implements XMLElementReader<Object> {
                 "    <!-- Comment! -->\n" +
                 "    <root xmlns=\"urn:test:one\"/>\n" +
                 "    <root xmlns=\"urn:test:one\"/>\n" +
+                "       <include xmlns='http://www.w3.org/2001/XInclude' href='foo.xml'/>\n"+
                 "    <root xmlns=\"urn:test:one\"/>\n" +
                 "    <test>    blah blah blah    </test>" +
                 "    <test>    blah1 blah1 blah1    </test>" +
